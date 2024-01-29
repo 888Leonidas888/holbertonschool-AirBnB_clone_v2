@@ -61,11 +61,13 @@ def odd_or_even(n):
 
 @app.teardown_appcontext()
 def close_session():
+    """Close session"""
     storage.close()
 
 
 @app.route("/states_list", strict_slashes=False)
 def list_states():
+    """List all states"""
     dict_states = storage.all(State).values()
     sorted_states = sorted(dict_states, key=lambda state: state.name)
     return render_template('7-states_list.html', states=sorted_states)
