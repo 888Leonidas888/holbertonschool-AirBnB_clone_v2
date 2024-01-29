@@ -4,5 +4,7 @@ models/engine/__pycache__/
 test_args.py
 test_params_create.txt
 main_delete.py
+main.py
 test_file_storage.py
 7-dump.sql
+100-hbnb.sql
