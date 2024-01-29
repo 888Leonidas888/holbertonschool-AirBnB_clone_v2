@@ -59,8 +59,8 @@ def odd_or_even(n):
         return render_template('6-number_odd_or_even.html', number=n, t=text)
 
 
-@app.teardown_appcontext()
-def close_session():
+@app.teardown_appcontext
+def close_session(exception):
     """Close session"""
     storage.close()
 
