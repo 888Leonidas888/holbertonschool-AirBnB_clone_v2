@@ -60,7 +60,7 @@ def odd_or_even(n):
 
 
 @app.teardown_appcontext
-def close_session(exception):
+def close_session():
     """Close session"""
     storage.close()
 
