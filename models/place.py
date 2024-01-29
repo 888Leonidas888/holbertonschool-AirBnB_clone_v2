@@ -5,9 +5,9 @@ from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from os import getenv
 
 
-class Place(BaseModel, Base):
-    """ A place to stay """
-    if getenv('HBNB_TYPE_STORAGE') == 'db':
+if getenv('HBNB_TYPE_STORAGE') == 'db':
+    class Place(BaseModel, Base):
+        """ A place to stay """
         __tablename__ = 'places'
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
@@ -20,7 +20,9 @@ class Place(BaseModel, Base):
         latitude = Column(Float, default=0.0)
         longitude = Column(Float, default=0.0)
         amenity_ids = []
-    else:
+else:
+    class Place(BaseModel):
+        """ A place to stay """
         city_id = ""
         user_id = ""
         name = ""
