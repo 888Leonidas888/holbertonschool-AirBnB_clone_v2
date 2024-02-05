@@ -12,12 +12,16 @@ if getenv('HBNB_TYPE_STORAGE') == 'db':
                           Base.metadata,
                           Column('place_id',
                                  String(60),
-                                 ForeignKey('places.id'),
+                                 ForeignKey('places.id',
+                                            onupdate='CASCADE',
+                                            ondelete='CASCADE'),
                                  primary_key=True,
                                  nullable=False),
                           Column('amenity_id',
                                  String(60),
-                                 ForeignKey('amenities.id'),
+                                 ForeignKey('amenities.id',
+                                            onupdate='CASCADE',
+                                            ondelete='CASCADE'),
                                  primary_key=True,
                                  nullable=False))
 
@@ -34,11 +38,11 @@ if getenv('HBNB_TYPE_STORAGE') == 'db':
         price_by_night = Column(Integer, nullable=False, default=0)
         latitude = Column(Float, nullable=True)
         longitude = Column(Float, nullable=True)
-        amenity_ids = []
         reviews = relationship(
             'Review', cascade='all, delete-orphan', backref='place')
-        amenities = relationship(
-            'Amenity', secondary=place_amenity, viewonly=False)
+        amenities = relationship('Amenity', secondary=place_amenity,
+                                 backref='place_amenities',
+                                 viewonly=False)
 else:
     class Place(BaseModel):
         """ A place to stay """
