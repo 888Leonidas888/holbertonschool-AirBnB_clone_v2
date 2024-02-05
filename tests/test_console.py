@@ -22,5 +22,7 @@ class TestConsole(unittest.TestCase):
     def test_do_quit(self):
         """Prueba para verificar que do_quit devueleve True"""
         with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
-            self.assertTrue(self.console.onecmd("EOF"))
-            self.assertEqual(mock_stdout.getvalue(), "")
+            with self.assertRaises(SystemExit):
+                HBNBCommand().onecmd("quit")
+                self.assertTrue(self.console.onecmd("quit"))
+            self.assertEqual(mock_stdout.getvalue().strip(), "")
