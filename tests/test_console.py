@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""Este modulo crea los test para console"""
+
+
 import unittest
 from unittest.mock import patch
 from io import StringIO
